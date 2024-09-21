@@ -1,13 +1,13 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": "Market share between IOS vs Android 2023",
+    "title": "Global vs Malaysia Population 2023",
     "width": 700,
     "height": 400,
     "projection": {
       "type": "equalEarth"
     },
     "data": {
-      "url": "../Homework_10/Data/Map_Data/mapbase.json",
+      "url": "map_layer.json",
       "format": {
         "type": "topojson",
         "feature": "ne_110m_admin_0_countries"
@@ -16,7 +16,7 @@
     "layer": [
       {
         "data": {
-          "url": "../Homework_10/Data/Map_Data/oceans.topojson",
+          "url": "ocean_layer.topojson",
           "format": {
             "type": "topojson",
             "feature": "oceans"
@@ -30,7 +30,7 @@
       },
       {
         "data": {
-          "url": "../Homework_10/Data/Map_Data/mapbase.json",
+          "url": "map_layer.json",
           "format": {
             "type": "topojson",
             "feature": "ne_110m_graticules_30"
@@ -52,72 +52,46 @@
       },
       {
         "data": {
-          "url": "../Homework_10/Data/Map_Data/Data.csv",
-          "format":{
-            "type": "csv"
-          }
+          "url": "../data/countries_lat_long.csv"
         },
         "mark": {
           "type": "circle",
-          "opacity": 0.6
+          "tooltip": {"content": "data"},
+          "opacity": 0.8
         },
         "encoding": {
           "tooltip": [
             {
-              "field": "Country",
+              "field": "CountryName",
               "title": "Country"
             },
             {
-              "field": "iosMarketShare",
+              "field": "Population",
               "type": "quantitative",
-              "title": "IOS Market Share"
-            },
-            {
-              "field": "androidMarketShare",
-              "type": "quantitative",
-              "title": "Android Market Share"
-            },
-            {
-              "field": "numUsers",
-              "title": "Total Smartphones"
+              "title": "Population"
             }
+    
           ],
           "color": {
-            "field": "Market Dominator",
-            "type": "nominal",
-            "scale": {
-              "domain": [
-                "IOS",
-                "Android"
-              ],
-              "range": ["#E0BFB8 ","#498d00"]
-            }
-          },
-          "opacity": {
-            "field": "market leader value",
+            "field": "Population",
             "type": "quantitative",
-            "scale": {
-              "domain": [50, 100],
-              "range": [0.25,0.95]
-            },
-            "title": "% of Market"
+            "scale": {"scheme": "reds"}
           },
+
           "latitude": {
-            "field": "country_Latitude",
+            "field": "latitude",
             "type": "quantitative"
           },
           "longitude": {
-            "field": "country_Longitude",
+            "field": "longitude",
             "type": "quantitative"
           },
           "size": {
-            "legend": null,
-            "field": "numUsers",
+            "field": "population",
             "type": "quantitative",
             "scale": {
-              "type": "sqrt",
-              "domain": [0,100],
-              "range": [0,1]
+              "domain": [0,10000000000],
+              "range": [10, 300]  
             }
           }
         }
